@@ -154,10 +154,23 @@
       var length = this.attributes.n;
       var count = 0;
       for (var i = 0; i < length; i++) {
-        if (board[i][i + diag] === 1) {
-          count++;
+        if (diag = 0) {
+          if (board[i][i] === 1) {
+            count++;
+          }
+        } else if (diag > 0){
+          if (board[i][i + diag] === 1) {
+            count++;
+          }
+          if (board[i + diag][i] === 1) {
+            count++;
+          }
         }
       }
+      if (count > 1) {
+        return true;
+      }
+      return false;
       // var diagCount = diag;
       // for (var i = 0; i < length; i++) {
       //   if (board[i][diagCount] === 1) {
@@ -165,10 +178,7 @@
       //   }
       //   diagCount++;
       // };
-      if (count > 1) {
-        return true;
-      }
-      return false; // fixme
+ // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -194,7 +204,7 @@
       var board = this.attributes;
       var length = board.n;
       var count = 0;
-      for (var i = length; i >= 0; i--) {
+      for (var i = 0; i < 0; i++) {
         if(board[i][i + diag] === 1) {
           count++;
         }
