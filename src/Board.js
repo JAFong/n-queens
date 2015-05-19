@@ -153,13 +153,18 @@
       // rows of board
       var length = this.attributes.n;
       var count = 0;
-      var diagCount = diag;
       for (var i = 0; i < length; i++) {
-        if (board[i][diagCount] === 1) {
+        if (board[i][i + diag] === 1) {
           count++;
         }
-        diagCount++;
-      };
+      }
+      // var diagCount = diag;
+      // for (var i = 0; i < length; i++) {
+      //   if (board[i][diagCount] === 1) {
+      //     count++;
+      //   }
+      //   diagCount++;
+      // };
       if (count > 1) {
         return true;
       }
@@ -184,12 +189,36 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+    //minorDiagonalColumnIndexAtFirstRow
+    hasMinorDiagonalConflictAt: function(diag) {
+      var board = this.attributes;
+      var length = board.n;
+      var count = 0;
+      for (var i = length; i >= 0; i--) {
+        if(board[i][i + diag] === 1) {
+          count++;
+        }
+      }
+      // for(var i = length; i >= 0; i++) {
+      //   if (board[i][i]) {
+      //     count++;
+      //   }
+      // }
+      if (count > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var board = this.attributes;
+      var length = board.n;
+      for (var i = 0; i < length; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
       return false; // fixme
     }
 

@@ -19,13 +19,13 @@ window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
 
   var board = new Board([
-    [1,1,0,0],
-    [1,1,1,0],
     [0,0,0,0],
-    [0,0,0,0]
+    [0,0,0,0],
+    [1,0,0,0],
+    [0,1,0,0]
     ]);
   console.log(board);
-  console.log(board.hasColConflictAt(0));
+  console.log(board.hasAnyMajorDiagonalConflicts());
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
