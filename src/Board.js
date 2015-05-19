@@ -266,7 +266,7 @@
         }
         return (count > 1) ? true : false;
       }
-      for (var i = 0; i < length; i++) {
+      for (var i = length; i >= 0; i--) {
         for (var j = 0; j < length; j++) {
           if (checkDiag(j, i)) return true;
         }
