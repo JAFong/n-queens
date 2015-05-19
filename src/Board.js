@@ -154,44 +154,75 @@
       var length = this.attributes.n;
       var count = 0;
       for (var i = 0; i < length; i++) {
-        if (diag = 0) {
-          if (board[i][i] === 1) {
+          if (board[i][diag] === 1) {
             count++;
           }
-        } else if (diag > 0){
-          if (board[i][i + diag] === 1) {
-            count++;
-          }
-          if (board[i + diag][i] === 1) {
-            count++;
-          }
-        }
+        diag++;
       }
       if (count > 1) {
         return true;
       }
       return false;
-      // var diagCount = diag;
-      // for (var i = 0; i < length; i++) {
-      //   if (board[i][diagCount] === 1) {
-      //     count++;
-      //   }
-      //   diagCount++;
-      // };
- // fixme
     },
+    // hasMajorDiagonalConflictAt: function(diag) {
+    //   var board = this.attributes;
+    //   // rows of board
+    //   var length = this.attributes.n;
+    //   var count = 0;
+    //   for (var i = 0; i < length; i++) {
+    //     if (diag = 0) {
+    //       if (board[i][i] === 1) {
+    //         console.log('board i i');
+    //         count++;
+    //       }
+    //     } else if (diag > 0){
+    //       if (board[i][i + diag] === 1) {
+    //         console.log('board diag i');
+    //         count++;
+    //       }
+    //       if (board[i + diag][i] === 1) {
+    //         console.log('board i diag');
+    //         count++;
+    //       }
+    //     }
+    //   }
+    //   if (count > 1) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var board = this.attributes;
       var length = board.n;
+      var checkDiag = function(initRow, initColumn) {
+        var count = 0;
+        for (var i = initRow; i < length; i++) {
+          if (board[i][initColumn] === 1) {
+            count++;
+          }
+          initColumn++
+        }
+        return (count > 1) ? true : false;
+      }
       for (var i = 0; i < length; i++) {
-        if (this.hasMajorDiagonalConflictAt(i)) {
-          return true;
+        for (var j = 0; j < length; j++) {
+          if (checkDiag(j, i)) return true;
         }
       }
-      return false;// fixme
+      return false;
     },
+    // hasAnyMajorDiagonalConflicts: function() {
+    //   var board = this.attributes;
+    //   var length = board.n;
+    //   for (var i = 0; i < length; i++) {
+    //     if (this.hasMajorDiagonalConflictAt(i)) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;// fixme
+    // },
 
 
 
@@ -204,10 +235,11 @@
       var board = this.attributes;
       var length = board.n;
       var count = 0;
-      for (var i = 0; i < 0; i++) {
-        if(board[i][i + diag] === 1) {
+      for (var i = 0; i < length; i++) {
+        if(board[i][diag] === 1) {
           count++;
         }
+        diag--;
       }
       // for(var i = length; i >= 0; i++) {
       //   if (board[i][i]) {
@@ -224,13 +256,33 @@
     hasAnyMinorDiagonalConflicts: function() {
       var board = this.attributes;
       var length = board.n;
+      var checkDiag = function(initRow, initColumn) {
+        var count = 0;
+        for (var i = initRow; i < length; i++) {
+          if (board[i][initColumn] === 1) {
+            count++;
+          }
+          initColumn--;
+        }
+        return (count > 1) ? true : false;
+      }
       for (var i = 0; i < length; i++) {
-        if (this.hasMinorDiagonalConflictAt(i)) {
-          return true;
+        for (var j = 0; j < length; j++) {
+          if (checkDiag(j, i)) return true;
         }
       }
       return false; // fixme
     }
+    // hasAnyMinorDiagonalConflicts: function() {
+    //   var board = this.attributes;
+    //   var length = board.n;
+    //   for (var i = 0; i < length; i++) {
+    //     if (this.hasMinorDiagonalConflictAt(i)) {
+    //       return true;
+    //     }
+    //   }
+    //   return false; // fixme
+    // }
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
